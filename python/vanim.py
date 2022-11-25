@@ -39,7 +39,7 @@ class Vanim:
         manim_flags = f"{'p' if preview else ''}q{quality}"
         manim_command = f"manim -{manim_flags} {self.file} {scene}"
         # phew! that's a lot of commands!
-        vim.command(f"!{manim_command}")
+        vim.command(f"silent exec !{manim_command}")
 
     def render_all(self, quality="h"):
         for node in self._get_scene_nodes():
