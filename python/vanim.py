@@ -1,6 +1,7 @@
-import vim  # type: ignore
-import os.path
 import ast
+import os.path
+
+import vim  # type: ignore
 
 
 class Vanim:
@@ -22,7 +23,7 @@ class Vanim:
 
     @staticmethod
     def _get_scene_nodes():
-        source = '\n'.join(vim.current.buffer)  # pack entire buffer into a string lol
+        source = "\n".join(vim.current.buffer)  # pack entire buffer into a string lol
         parsed = ast.parse(source)
         for node in ast.walk(parsed):
             if not isinstance(node, ast.ClassDef):
@@ -36,13 +37,9 @@ class Vanim:
         scene = scene or self.scene
         assert scene is not None
         manim_flags = f"{'p' if preview else ''}q{quality}"
-        manim_command = f"manim -{manim_flags} --save_sections {self.file} {scene}"
-        prompt_command = r"echo \"Press Enter to close this window.\"; read" if preview else ""
-        shell_command = f'sh -c "{manim_command}; {prompt_command}"'
-        gnome_command = f"gnome-terminal --working-directory={self.cwd} -q -- {shell_command}"
-        vim_command = f"execute 'silent !{gnome_command}' | redraw!"
+        manim_command = f"manim -{manim_flags} {self.file} {scene}"
         # phew! that's a lot of commands!
-        vim.command(vim_command)
+        vim.command(f"!{manim_command}")
 
     def render_all(self, quality="h"):
         for node in self._get_scene_nodes():
