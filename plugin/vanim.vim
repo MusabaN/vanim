@@ -30,12 +30,12 @@ vanim = Vanim()
 EOF
 
 " command bindings
-command! -nargs=? VanimRenderL :vanim.render("l", <args>)
-command! -nargs=? VanimRenderM :vanim.render("m", <args>)
-command! -nargs=? VanimRenderH :vanim.render("h", <args>)
-command! -nargs=? VanimRenderP :vanim.render("p", <args>)
-command! -nargs=? VanimRenderK :vanim.render("k", <args>)
-command! -nargs=? VanimRenderAll :vanim.render_all(<args>)
+command! -nargs=? VanimRenderL :python3 vanim.render("l", <args>)
+command! -nargs=? VanimRenderM :python3 vanim.render("m", <args>)
+command! -nargs=? VanimRenderH :python3 vanim.render("h", <args>)
+command! -nargs=? VanimRenderP :python3 vanim.render("p", <args>)
+command! -nargs=? VanimRenderK :python3 vanim.render("k", <args>)
+command! -nargs=? VanimRenderAll :python3 vanim.render_all(<args>)
 
 " set a flag to indicate that this file has been run
 let g:vanim_plugin_loaded = 1
